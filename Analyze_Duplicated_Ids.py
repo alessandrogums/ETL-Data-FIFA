@@ -21,12 +21,13 @@ class Duplicated_Ids:
             dici_ids={}
             temp=[]
             temp_set=set()
-            acum,start,count_val_not_moved=0,0,0
+            acum,count_val_not_moved=0,0
             val_not_moved=[]
 
             for k in range(len(lista_ids)):
                 temp.append(lista_ids[k])
                 temp_set.add(lista_ids[k])
+
                 if len(temp) != len(temp_set):
                    
                     v_arm=lista_ids[k]
@@ -34,7 +35,8 @@ class Duplicated_Ids:
                     ini=0
                     fin=-2
 
-                    #iterar pelos extremos, no sentido de identificar o valor 
+                    #iterar pelos extremos, no sentido de identificar o valor de forma mais rápida, caso o array estivesse ordenado, poderia ser utilizado a busca binária, a fim de ser mais rápido ainda
+                    #porém, para manter a integridade do array, foi feito desta forma
                     while temp[ini] != v_arm and temp[fin]!=v_arm:
                         ini=ini+1
                 
@@ -42,47 +44,15 @@ class Duplicated_Ids:
                     
                     fin=len(temp)+fin
 
-                    #quando o valor for mais próximo do inicio para o meio da lista, identifica-se onde ele inicia e termina, armazendo seu elemento a partir da lista temporaria
-                    if temp[ini]==v_arm:
-                        end=ini
-                       
-                        if end > start:
-
-                            t=[temp[i]for i in range(start,end)]+[temp[s] for s in range(0,start)]
-                         
-                        else:
-                            t=[temp[i] for i in range(0,end)]
-                        
-    
-                        start=end
-
-                        count_val_not_moved=val_not_moved.count(v_arm)
-                        dici_ids[k_arm]=[ini+acum-count_val_not_moved,v_arm]
-                        temp=temp[:ini]+temp[ini+1:]
-                        count_val_not_moved=0
-
-                    #quando o valor for mais próximo do fim para o meio da lista, identifica-se onde ele inicia e termina, armazendo seu elemento a partir da lista temporaria
-                    else:
-                        
-                        end=fin
-
-                        if end > start:
-
-                            t=[temp[i] for i in range(start,end)]+[temp[s] for s in range(0,start)]
-                        
-                        else:
-
-                            t=[temp[i] for i in range(0,start)]
-                        
-                        start=end
-    
-                        count_val_not_moved=val_not_moved.count(v_arm)
-                        dici_ids[k_arm]=[fin+acum-count_val_not_moved,v_arm]
-                        count_val_not_moved=0
-                        temp=temp[:fin]+temp[fin+1:]
                     
+                    val=ini if temp[ini]==v_arm else fin
+                    t=temp[:val]
+                    
+                    count_val_not_moved=val_not_moved.count(v_arm)
+                    dici_ids[k_arm]=[val+acum-count_val_not_moved,v_arm]
+                    temp=temp[:val]+temp[val+1:]
+                    count_val_not_moved=0
 
-                   
                     val_not_moved.extend(t)
                     val_not_moved=list(filter(lambda x: x!=v_arm,val_not_moved))
                     acum+=1
