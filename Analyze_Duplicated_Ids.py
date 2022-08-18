@@ -48,6 +48,7 @@ class Duplicated_Ids:
                         if end > start:
 
                             t=[temp[i]for i in range(start,end)]+[temp[s] for s in range(0,start)]
+                         
                         else:
                             t=[temp[i] for i in range(0,end)]
                         
