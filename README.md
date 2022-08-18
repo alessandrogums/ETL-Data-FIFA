@@ -28,4 +28,6 @@ Os dados encontram-se armazenados na pasta **data** deste repositório. Este d
 
 -Tratamento dos dados para cada CSV
 
+-Análise de dados com os dados tratados
+
 -Carregamento dos dados 
