@@ -28,11 +28,12 @@ class Duplicated_Ids:
                 temp.append(lista_ids[k])
                 temp_set.add(lista_ids[k])
                 if len(temp) != len(temp_set):
-                    
+                   
                     v_arm=lista_ids[k]
                     k_arm=k
                     ini=0
                     fin=-2
+
                     #iterar pelos extremos, no sentido de identificar o valor 
                     while temp[ini] != v_arm and temp[fin]!=v_arm:
                         ini=ini+1
@@ -44,7 +45,7 @@ class Duplicated_Ids:
                     #quando o valor for mais próximo do inicio para o meio da lista, identifica-se onde ele inicia e termina, armazendo seu elemento a partir da lista temporaria
                     if temp[ini]==v_arm:
                         end=ini
-
+                       
                         if end > start:
 
                             t=[temp[i]for i in range(start,end)]+[temp[s] for s in range(0,start)]
@@ -54,20 +55,14 @@ class Duplicated_Ids:
                         
     
                         start=end
-                    
-                        for q in val_not_moved:
-                            alm=q.count(v_arm)
-                            count_val_not_moved+=alm
-                            if v_arm in q:
-                                q.remove(v_arm)
-                    
+
+                        count_val_not_moved=val_not_moved.count(v_arm)
                         dici_ids[k_arm]=[ini+acum-count_val_not_moved,v_arm]
-                        val_not_moved.append(t)
                         temp=temp[:ini]+temp[ini+1:]
                         count_val_not_moved=0
 
                     #quando o valor for mais próximo do fim para o meio da lista, identifica-se onde ele inicia e termina, armazendo seu elemento a partir da lista temporaria
-                    elif temp[fin]==v_arm:
+                    else:
                         
                         end=fin
 
@@ -80,20 +75,16 @@ class Duplicated_Ids:
                             t=[temp[i] for i in range(0,start)]
                         
                         start=end
-
-                        for q in val_not_moved:
-                            alm=q.count(v_arm)
-                            count_val_not_moved+=alm
-                            if v_arm in q:
-                                q.remove(v_arm)
-
+    
+                        count_val_not_moved=val_not_moved.count(v_arm)
                         dici_ids[k_arm]=[fin+acum-count_val_not_moved,v_arm]
-                        val_not_moved.append(t)
                         count_val_not_moved=0
                         temp=temp[:fin]+temp[fin+1:]
                     
 
-
+                   
+                    val_not_moved.extend(t)
+                    val_not_moved=list(filter(lambda x: x!=v_arm,val_not_moved))
                     acum+=1
 
             return dici_ids
