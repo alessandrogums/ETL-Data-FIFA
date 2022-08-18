@@ -17,10 +17,6 @@ class DataAnalyze:
         else:
             return 'não contém nans nesta coluna'
     
-    def detect_values_duplicated(self,name_column):
-        data_duplicated=self.dataframe[name_column].duplicated()
-        data_coleted_dup=[self.dataframe[name_column][k] for k in range(self.dataframe.shape[0]) if data_duplicated[k]]
-        return data_coleted_dup
 
     def identify_outliers(self,name_column):
         #o método Z-Score relaciona se baseia na investigação de um certo dado em como ele se relaciona com a média e o desvio padrão do grupo com o qual este dado está inserido
