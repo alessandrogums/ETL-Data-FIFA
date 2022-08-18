@@ -19,3 +19,16 @@ Os dados encontram-se armazenados na pasta **data** deste repositório. Este d
 5. (🔎) Player_Attributes.csv (*Arquivo de dados*)
 6. (🔎) Team.csv (*Arquivo de dados*)
 7. (🔎) Team_Attributes.csv (*Arquivo de dados*)
+
+Colocar esses arquivos em uma Pasta chamada Data
+
+# **Estratégias:**
+-Extração dos CSVs através da classe ConvertFile.py
+
+-Análise para arquivos csv de forma única sob um arquivo ipynb em cima de possíveis detecções para posterior tratamento, utlizando a classe DataAnalyze.py
+
+-Tratamento dos dados para cada CSV
+
+-Análise de dados com os dados tratados
+
+-Carregamento dos dados 
