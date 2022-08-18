@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np 
 
 class Duplicated_Ids:
-    def __init__(self,dataframe,nome_col_id=''):
+    def __init__(self,dataframe,nome_col_id):
 
         self.dataframe=dataframe.copy()
         self.nome_col_id=nome_col_id
