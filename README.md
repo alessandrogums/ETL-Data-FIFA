@@ -20,6 +20,7 @@ Os dados encontram-se armazenados na pasta **data** deste repositório. Este d
 6. (🔎) Team.csv (*Arquivo de dados*)
 7. (🔎) Team_Attributes.csv (*Arquivo de dados*)
 
+Colocar esses arquivos em uma Pasta chamada Data
 
 # **Estratégias:**
 -Extração dos CSVs através da classe ConvertFile.py
