@@ -22,7 +22,7 @@ class Duplicated_Ids:
             temp=[]
             temp_set=set()
             acum,count_val_not_moved=0,0
-            val_not_moved=[]
+            val_not_moved=np.array([])
 
             for k in range(len(lista_ids)):
                 temp.append(lista_ids[k])
@@ -46,21 +46,22 @@ class Duplicated_Ids:
 
                     
                     val=ini if temp[ini]==v_arm else fin
-                    t=temp[:val]
-                    
-                    count_val_not_moved=val_not_moved.count(v_arm)
+                    t=np.array(temp[:val])
+                
+                    count_val_not_moved=np.count_nonzero(val_not_moved==v_arm)
+
                     dici_ids[k_arm]=[val+acum-count_val_not_moved,v_arm]
                     temp=temp[:val]+temp[val+1:]
                     count_val_not_moved=0
-
-                    val_not_moved.extend(t)
-                    val_not_moved=list(filter(lambda x: x!=v_arm,val_not_moved))
+                    val_not_moved=np.concatenate((val_not_moved,t),axis=0)
+                    val_not_moved=np.setdiff1d(val_not_moved,[v_arm])
+                   
                     acum+=1
 
             return dici_ids
-           
         else:
             return {}
+    
     
     #agrupamento de valores para retornar como um dicionario contendo os valores e seus indices apresentados no dataframe
     def grouping_indexes(self):
