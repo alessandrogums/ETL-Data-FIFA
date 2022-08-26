@@ -2,12 +2,23 @@
 import pandas as pd 
 import numpy as np
 import re 
+from cmath import isnan
 
 class DataAnalyze:
 
     def __init__(self,dataframe):
         self.dataframe=dataframe
     
+
+
+
+    def count_nans(self,name_column):
+        ls=self.dataframe[name_column].tolist()
+        c_nan=[isnan(c) for c in ls]
+        prop_nan=(sum(c_nan)/len(c_nan))*100
+        return f'{prop_nan:.2f} %'
+
+
 
     def detect_nans(self,name_column):
         data_nans=self.dataframe[name_column].isna()
