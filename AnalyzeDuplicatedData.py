@@ -2,35 +2,35 @@
 import pandas as pd
 import numpy as np 
 
-class Duplicated_Ids:
-    def __init__(self,dataframe,nome_col_id):
+class AnalyzeDuplicatedData:
+    def __init__(self,dataframe,name_col_data):
 
         self.dataframe=dataframe.copy()
-        self.nome_col_id=nome_col_id
-        self.quant_dup_ids=self.dataframe[self.nome_col_id].duplicated().sum()
+        self.name_col_data=name_col_data
+        self.quant_dup_data=self.dataframe[self.name_col_data].duplicated().sum()
 
-    def print_duplicated_ids(self,nome_da_tabela):
+    def print_duplicated_data(self,table_name):
 
-        print(f'a quantidade de ids duplicados da tabela {nome_da_tabela} são {self.quant_dup_ids}')
+        print(f'a quantidade de dados duplicados da tabela {table_name}  na coluna {self.name_col_data} são {self.quant_dup_data}')
     
-    def detect_indexes_ids(self):
+    def detect_indexes_data(self):
         #avaliação dos indices duplicados, gerando um dicionario contendo: chave sendo a posição em que o valor foi duplicado, e o valor como sendo uma lista contendo a posição inicial desta chave, e o seu respectivo valor
 
-        if self.quant_dup_ids > 0:
-            lista_ids=self.dataframe[self.nome_col_id].tolist()
-            dici_ids={}
+        if self.quant_dup_data > 0:
+            list_data=self.dataframe[self.name_col_data].tolist()
+            dici_data={}
             temp=[]
             temp_set=set()
             acum,count_val_not_moved=0,0
             val_not_moved=np.array([])
 
-            for k in range(len(lista_ids)):
-                temp.append(lista_ids[k])
-                temp_set.add(lista_ids[k])
+            for k in range(len(list_data)):
+                temp.append(list_data[k])
+                temp_set.add(list_data[k])
 
                 if len(temp) != len(temp_set):
                    
-                    v_arm=lista_ids[k]
+                    v_arm=list_data[k]
                     k_arm=k
                     ini=0
                     fin=-2
@@ -50,7 +50,7 @@ class Duplicated_Ids:
                 
                     count_val_not_moved=np.count_nonzero(val_not_moved==v_arm)
 
-                    dici_ids[k_arm]=[val+acum-count_val_not_moved,v_arm]
+                    dici_data[k_arm]=[val+acum-count_val_not_moved,v_arm]
                     temp=temp[:val]+temp[val+1:]
                     count_val_not_moved=0
                     val_not_moved=np.concatenate((val_not_moved,t),axis=0)
@@ -58,7 +58,7 @@ class Duplicated_Ids:
                    
                     acum+=1
 
-            return dici_ids
+            return dici_data
         else:
             return {}
     
@@ -66,7 +66,7 @@ class Duplicated_Ids:
     #agrupamento de valores para retornar como um dicionario contendo os valores e seus indices apresentados no dataframe
     def grouping_indexes(self):
 
-        dict_desordened=self.detect_indexes_ids()
+        dict_desordened=self.detect_indexes_data()
         ord=dict(sorted(dict_desordened.items(), key=lambda y: y[1][1]))
         new_dici={}
         acum=((list(ord.keys())[0]))
@@ -85,11 +85,11 @@ class Duplicated_Ids:
 
         
     #detecação somente dos valores, sem levar em consideração seus indices 
-    def detect_values_ids(self):
+    def detect_values_data(self):
 
-        if self.quant_dup_ids > 0:
-            data_duplicated=self.dataframe[self.nome_col_id].duplicated()
-            data_coleted_dup=[self.dataframe[self.nome_col_id][k] for k in range(self.dataframe.shape[0]) if data_duplicated[k]==True]
+        if self.quant_dup_data > 0:
+            data_duplicated=self.dataframe[self.name_col_data].duplicated()
+            data_coleted_dup=[self.dataframe[self.name_col_data][k] for k in range(self.dataframe.shape[0]) if data_duplicated[k]==True]
             return data_coleted_dup
         else:
             return []

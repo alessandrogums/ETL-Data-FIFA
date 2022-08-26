@@ -48,6 +48,13 @@ class DataAnalyze:
         except ValueError:
             print("O dado não pode ser convertido pra inteiro")
     
+
+    def confirm_typing(self,name_column,type_expected):
+        types={'float':1.11,'integer':2,'int':33,'str':'string','dict':{1:3},list:[]}
+        type_exp=types[type_expected]
+        conf=[t for t in self.dataframe[name_column] if type(t)!=type(type_exp)]    
+        return conf 
+
     def analyze_typing_expected_number(self,expected_type_number,name_column):
         #geração de um dicionário contendo os dados que não correspondem a uma variável numérica
 
@@ -75,7 +82,7 @@ class DataAnalyze:
                     elif isinstance(act_val,float) and isinstance(type_expect,int):
 
                         compare=self.convert_string_to_number(act_val,float,int)
-                        if compare == None:
+                        if compare != None:
                             dici_val[key]=[act_val,'same expected value between int and float typing']
 
                     elif isinstance(act_val,bool):
