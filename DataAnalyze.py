@@ -46,7 +46,7 @@ class DataAnalyze:
             return outliers 
 
         except ValueError:
-            print("O dado não pode ser convertido pra inteiro")
+            print("O dado não pode ser convertido pra float")
     
 
     def confirm_typing(self,name_column,type_expected):
