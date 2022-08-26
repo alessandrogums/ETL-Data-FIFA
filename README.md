@@ -27,7 +27,7 @@ Colocar esses arquivos em uma Pasta chamada Data
 
 -Análise para arquivos csv de forma única sob um arquivo ipynb em cima de possíveis detecções para posterior tratamento, utlizando a classe DataAnalyze.py, juntamente com AnalyzeDuplicatedData.py
 
--Tratamento/Transformação dos dados para cada CSV
+-Tratamento/Transformação dos dados para cada CSV via classe DataTransform.py
 
 -Análise de dados com os dados tratados
 
