@@ -51,18 +51,22 @@ class DataAnalyze:
 
     def confirm_typing(self,name_column,type_expected):
         types={'float':1.11,'integer':2,'int':33,'str':'string','dict':{1:3},list:[]}
-        type_exp=types[type_expected]
-        conf=[t for t in self.dataframe[name_column] if type(t)!=type(type_exp)]    
-        return conf 
+        if types.get(type_expected) != None:
+            type_exp=types[type_expected]
+            conf=[t for t in self.dataframe[name_column] if type(t)!=type(type_exp)]    
+            return conf 
+        else:
+            return 'escreva a tipagem correta'
 
     def analyze_typing_expected_number(self,expected_type_number,name_column):
-        #geração de um dicionário contendo os dados que não correspondem a uma variável numérica
+        #geração de um dicionário contendo os dados que podem corresponder a uma variável numérica 
 
 
         patt={'float':1.11,'integer':2,'int':33}
-        type_expect=patt[expected_type_number]
+      
         if patt.get(expected_type_number)!=None:
             dici_val={}
+            type_expect=patt[expected_type_number]
             for key,_ in self.dataframe.iterrows():
                     act_val=self.dataframe[name_column][key]
                     if isinstance(act_val,str) and  isinstance(type_expect,int):
