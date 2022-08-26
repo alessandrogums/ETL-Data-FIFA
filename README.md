@@ -10,7 +10,7 @@ Temporadas 2008 a 2016;
 
 # **Informações dos dados:**
 
-Os dados encontram-se armazenados na pasta **data** deste repositório. Este diretório contém os seguintes arquivos:
+Os dados encontram-se armazenados no arquivo **data** deste repositório. Este diretório contém os seguintes arquivos:
 
 1. (🔎) Country.csv(*Arquivo de dados*)
 2. (🔎) League.csv (*Arquivo de dados*)
