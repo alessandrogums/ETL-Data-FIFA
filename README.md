@@ -10,7 +10,7 @@ Temporadas 2008 a 2016;
 
 # **Informações dos dados:**
 
-Os dados encontram-se armazenados na pasta **data** deste repositório. Este diretório contém os seguintes arquivos:
+Os dados encontram-se armazenados no arquivo **data** deste repositório. Este diretório contém os seguintes arquivos:
 
 1. (🔎) Country.csv(*Arquivo de dados*)
 2. (🔎) League.csv (*Arquivo de dados*)
@@ -25,9 +25,9 @@ Colocar esses arquivos em uma Pasta chamada Data
 # **Estratégias:**
 -Extração dos CSVs através da classe ConvertFile.py
 
--Análise para arquivos csv de forma única sob um arquivo ipynb em cima de possíveis detecções para posterior tratamento, utlizando a classe DataAnalyze.py
+-Análise para arquivos csv de forma única sob um arquivo ipynb em cima de possíveis detecções para posterior tratamento, utlizando a classe DataAnalyze.py, juntamente com AnalyzeDuplicatedData.py
 
--Tratamento dos dados para cada CSV
+-Tratamento/Transformação dos dados para cada CSV via classe DataTransform.py
 
 -Análise de dados com os dados tratados
 
