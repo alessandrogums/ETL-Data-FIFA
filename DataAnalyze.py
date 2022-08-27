@@ -12,11 +12,18 @@ class DataAnalyze:
 
 
 
-    def count_nans(self,name_column):
-        ls=self.dataframe[name_column].tolist()
-        c_nan=[isnan(c) for c in ls]
-        prop_nan=(sum(c_nan)/len(c_nan))*100
-        return f'{prop_nan:.2f} %'
+    def count_nans(self,name_columns:list):
+        dici_data={}
+        for col in name_columns:
+            ls=self.dataframe[col].tolist()
+            c_nan=[True for c in ls if  isinstance(c,float) and isnan(c)==True]
+            
+            if c_nan==[]:
+                dici_data[col]=0
+            else:
+                prop_nan=(sum(c_nan)/len(ls))*100
+                dici_data[col]=prop_nan
+        return dici_data
 
 
 
@@ -36,24 +43,38 @@ class DataAnalyze:
         # Para identificação do outlier, este valor não pode passar de 3 ou -3
         #para tratar os dados antes de passar pelo loop, quando passar por um NaN
 
+        #O método Z-score trata bem outliers quando a amostra afeta sigficativamente na distribuição gaussiana e quando a amostra possui um conjunto de dados grande
+        #No entanto, quando esses dois parâmetros são contrários, o desvio padrao e média acabam sendo bastante afetados pelos outliers
+        #Sendo assim, existe uma fórmula modificada para tornar o z-score ainda mais robusto para os seus pontos limitantes
+
+        #fórmula=0.6745(valor_amostra - mediana)/desvio absoluto mediano(Mad)
+
+        #A mediana e MAD são medidas robustas de tendência central e dispersão, de forma respectiva
+
+
+
+        #Autores :Giampaolo E. D'Errico and Nadir Murru , artigo "Fuzzy Treatment of Candidate Outliers in Measurements"
+
         try:
             #para tratar os dados antes de passar pelo loop, quando passar por um NaN
             data_filter=self.dataframe[name_column].replace({np.nan:0})
 
             #transformando os dados para float, para agregar tanto os núms flutantes, como os ints
             transform_float=list(map(lambda x:float(x),data_filter))
-            media=sum(transform_float)/len(data_filter)
-            desv_pad=np.std(transform_float)  
-            validador=3
+            median=np.median(np.array(transform_float))
+            Mad=np.median([(abs(y-median)) for y in transform_float])
+            const=0.6745
+            validador=3.5 
             outliers={}
 
-        #os valores serão armazenados em um dicionário representando o indice:[valor do z, valor sob este indice]"
+        #os valores serão armazenados em um dicionário representando o indice:[valor do mi, valor sob este indice]"
             
             for lin in range(self.dataframe.shape[0]):
                 value=transform_float[lin]
-                z=(value - media)/desv_pad
-                if z > validador or z<-validador:
-                    outliers[lin]=[z,value]
+                mi=const*(value-median)/Mad
+
+                if mi > validador or mi <-validador:
+                    outliers[lin]=[mi,value]
             return outliers 
 
         except ValueError:

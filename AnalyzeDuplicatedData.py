@@ -65,22 +65,24 @@ class AnalyzeDuplicatedData:
     
     #agrupamento de valores para retornar como um dicionario contendo os valores e seus indices apresentados no dataframe
     def grouping_indexes(self):
+        if self.quant_dup_data > 0:
+            dict_desordened=self.detect_indexes_data()
+            ord=dict(sorted(dict_desordened.items(), key=lambda y: y[1][1]))
+            new_dici={}
+            acum=((list(ord.keys())[0]))
 
-        dict_desordened=self.detect_indexes_data()
-        ord=dict(sorted(dict_desordened.items(), key=lambda y: y[1][1]))
-        new_dici={}
-        acum=((list(ord.keys())[0]))
-
-        for value in ord.values():
-            
-            if acum==value[1]:
-                tmp=new_dici[acum]
-                tmp.append(value[0])
-                new_dici[acum]=tmp
-            else:
-                new_dici[value[1]]=[value[0]]
-                acum=value[1]
-        return new_dici 
+            for value in ord.values():
+                
+                if acum==value[1]:
+                    tmp=new_dici[acum]
+                    tmp.append(value[0])
+                    new_dici[acum]=tmp
+                else:
+                    new_dici[value[1]]=[value[0]]
+                    acum=value[1]
+            return new_dici 
+        else:
+            return None
 
 
         
