@@ -52,21 +52,8 @@ class ObsMatchFields:
                             dici[var]=[pos]
                     
                 marc+=1
-                # else:
-                #     break
+               
 
-
-
-            # if dici_tot=={}:
-            #     dici_tot=dici
-            # else:
-            #     temp1=set(dici.keys())
-            #     temp2=set(dici_tot.keys())
-                
-            #     inters=temp2.intersection(temp1)
-            #     dici_t={item:dici_tot[item]+dici[item] for item in inters}
-            #     dici_tot=dici_t.copy()
-        
 
         dici_upd={k:(sum(v)//self.Df.shape[0]) for k,v in dici.items()}
         return dici_upd
