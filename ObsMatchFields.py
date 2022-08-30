@@ -54,8 +54,8 @@ class ObsMatchFields:
                 marc+=1
                
 
-
-        dici_upd={k:(sum(v)//self.Df.shape[0]) for k,v in dici.items()}
+        
+        dici_upd={k:(sum(v)//(len(v))) for k,v in dici.items()}
         return dici_upd
 
     
