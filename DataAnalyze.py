@@ -36,7 +36,20 @@ class DataAnalyze:
             return 'não contém nans nesta coluna'
     
 
-    def identify_outliers(self,name_column):
+
+    def identify_outliers_IQR(self,name_column):
+        array_col=np.array(self.dataframe[name_column])
+        q1,q3=np.percentile(array_col,[25,75])
+        iqr=q3-q1
+        lower_rang=q1-(1.5*iqr)
+        upp_rang=q3+(1.5*iqr)
+        
+        vet_out=[v for v in array_col if v<lower_rang or v>upp_rang]
+        return vet_out
+
+
+
+    def identify_outliers_z_score_mod(self,name_column):
         #o método Z-Score relaciona se baseia na investigação de um certo dado em como ele se relaciona com a média e o desvio padrão do grupo com o qual este dado está inserido
         # A fórmula é representada da seguinte forma: z = (x – μ)/σ
         #onde o x é a amostra avaliada, mi a média e o sigma o desvio padrão
