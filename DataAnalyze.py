@@ -150,9 +150,9 @@ class DataAnalyze:
         number_of_na=data_test.index[data_test[name_column].isna()].tolist()
         if len(number_of_na) != 0:
             list_values=[self.dataframe.loc[v,name_column] for v in number_of_na]
-
-        return list_values
-
+            return list_values
+        else:
+            return 'all the data are in the date structure'
 
     @staticmethod
     def convert_string_to_number(string,type_ness,type_def):
