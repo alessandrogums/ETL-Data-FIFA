@@ -29,6 +29,8 @@ Colocar esses arquivos em uma Pasta chamada Data
 
 -Tratamento/Transformação dos dados para cada CSV via classe DataTransform.py
 
--Análise de dados com os dados tratados
+-Carregamento dos CSVs em uma pasta chamada Load_csvs(necessário cria-la no mesmo diretório,ou mudar o caminho relativo no tópico Load CSV)
 
--Carregamento dos dados 
+-Análise de dados com os dados tratados/transformados
+
+-Carregamento dos dados em um banco de dados 
