@@ -39,7 +39,8 @@ class DataAnalyze:
 
     def identify_outliers_IQR(self,name_column):
         array_col=np.array(self.dataframe[name_column])
-        q1,q3=np.percentile(array_col,[25,75])
+        q1=np.quantile(array_col,0.25)
+        q3=np.quantile(array_col,0.75)
         iqr=q3-q1
         lower_rang=q1-(1.5*iqr)
         upp_rang=q3+(1.5*iqr)
@@ -77,7 +78,7 @@ class DataAnalyze:
             median=np.median(np.array(transform_float))
             Mad=np.median([(abs(y-median)) for y in transform_float])
             const=0.6745
-            validador=3.5 
+            validator=3.5 
             outliers={}
 
         #os valores serão armazenados em um dicionário representando o indice:[valor do mi, valor sob este indice]"
@@ -86,7 +87,7 @@ class DataAnalyze:
                 value=transform_float[lin]
                 mi=const*(value-median)/Mad
 
-                if mi > validador or mi <-validador:
+                if mi > validator or mi <-validator:
                     outliers[lin]=[mi,value]
             return outliers 
 
