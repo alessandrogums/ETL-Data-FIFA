@@ -36,7 +36,7 @@ class AnalyzeDuplicatedData:
                     fin=-2
 
                     #iterar pelos extremos, no sentido de identificar o valor de forma mais rápida, caso o array estivesse ordenado, poderia ser utilizado a busca binária, a fim de ser mais rápido ainda
-                    #porém, para manter a integridade do array, foi feito desta forma
+                    #porém, para manter as posições reais equivalantes no Df, foi feito dessa forma 
                     while temp[ini] != v_arm and temp[fin]!=v_arm:
                         ini=ini+1
                 
