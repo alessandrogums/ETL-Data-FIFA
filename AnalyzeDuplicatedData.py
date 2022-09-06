@@ -27,7 +27,7 @@ class AnalyzeDuplicatedData:
             for k in range(len(list_data)):
                 temp.append(list_data[k])
                 temp_set.add(list_data[k])
-
+              
                 if len(temp) != len(temp_set):
                    
                     v_arm=list_data[k]
@@ -37,18 +37,26 @@ class AnalyzeDuplicatedData:
 
                     #iterar pelos extremos, no sentido de identificar o valor de forma mais rápida, caso o array estivesse ordenado, poderia ser utilizado a busca binária, a fim de ser mais rápido ainda
                     #porém, para manter as posições reais equivalantes no Df, foi feito dessa forma 
-                    while temp[ini] != v_arm and temp[fin]!=v_arm:
-                        ini=ini+1
+                    # while temp[ini] != v_arm and temp[fin]!=v_arm:
+                    #     ini=ini+1
                 
+                    #     fin=-(ini+2)
+                    
+                    # fin=len(temp)+fin
+                    # val=ini if temp[ini]==v_arm else fin
+                    for ini in range(len(temp)//2 + 1):
                         fin=-(ini+2)
-                    
-                    fin=len(temp)+fin
-
-                    
-                    val=ini if temp[ini]==v_arm else fin
+                        if temp[ini] ==v_arm:
+                            val=ini
+                            break
+                        elif temp[fin]==v_arm:
+                            val=len(temp)+fin
+                            break
+                   
+                 
                     t=np.array(temp[:val])
                 
-                    count_val_not_moved=np.count_nonzero(val_not_moved==v_arm)
+                    count_val_not_moved=np.count_nonzero(val_not_moved == v_arm)
 
                     dici_data[k_arm]=[val+acum-count_val_not_moved,v_arm]
                     temp=temp[:val]+temp[val+1:]

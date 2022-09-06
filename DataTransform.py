@@ -18,9 +18,9 @@ class DataTransform:
         if all:
             self.dataframe_to_transform.drop_duplicates(inplace=True)
             return self.dataframe_to_transform
-
-        self.dataframe_to_transform.drop_duplicates(subset=name_column,inplace=True)
+        for col in name_column:
+            self.dataframe_to_transform.drop_duplicates(subset=col,inplace=True)
         return self.dataframe_to_transform.reset_index()
 
     def transf_typing(self,name_column:str,type_expected):
-        return self.dataframe_to_transform.astype({f'{name_column}': f'{type_expected}'})
+        return self.dataframe_to_transform.astype({f'{name_column}':f'{type_expected}'})
