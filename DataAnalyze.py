@@ -116,17 +116,16 @@ class DataAnalyze:
             for key,_ in self.dataframe.iterrows():
                     act_val=self.dataframe[name_column][key]
                     if isinstance(act_val,str) and  isinstance(type_expect,int):
-
                         rgx_int="^((0?[1-9]{0,1})|^[1-9]{1}[0-9]*)([.]{1}[0]{1})?$"
                         ident=re.match(rgx_int,act_val.replace(",",".").strip())
-                        if ident == None:
+                        if ident != None:
                             dici_val[key]=[act_val,'detected str, expected structure type int']
                     
                     elif isinstance(act_val,str) and  isinstance(type_expect,float):
 
                         rgx_float="(^([1-9]{1}[0-9]*)([.][0-9]+)?$)|^([0]{1})([.][0-9]+)?$"
                         ident=re.match(rgx_float,act_val.replace(",",".").strip())
-                        if ident == None:
+                        if ident != None:
                             dici_val[key]=[act_val,'detect str, expected structure type float']
 
                     elif isinstance(act_val,float) and isinstance(type_expect,int):
