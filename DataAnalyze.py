@@ -130,7 +130,7 @@ class DataAnalyze:
 
                     elif isinstance(act_val,float) and isinstance(type_expect,int):
 
-                        compare=self.convert_string_to_number(act_val,float,int)
+                        compare=self.__convert_string_to_number(act_val,float,int)
                         if compare != None:
                             dici_val[key]=[act_val,'same expected value between int and float typing']
 
@@ -155,7 +155,7 @@ class DataAnalyze:
             return 'all the data are in the date structure'
 
     @staticmethod
-    def convert_string_to_number(string,type_ness,type_def):
+    def __convert_string_to_number(string,type_ness,type_def):
         try:
             ini= type_ness(eval(str(string)))
             to=type_def(eval(str(string)))
