@@ -38,7 +38,12 @@ class DataAnalyze:
 
 
     def identify_outliers_IQR(self,name_column):
-        array_col=np.array(self.dataframe[name_column])
+        #transformando a coluna em númerica para não gerar algum tipo de erro
+        to_arr=pd.to_numeric(self.dataframe[name_column],errors='coerce')
+        #para tratar os dados antes de passar pelo loop, quando passar por um NaN
+        data_filter=to_arr.replace({np.nan:0}).tolist()
+        
+        array_col=np.array(data_filter)
         q1=np.quantile(array_col,0.25)
         q3=np.quantile(array_col,0.75)
         iqr=q3-q1
