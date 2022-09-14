@@ -75,8 +75,10 @@ class DataAnalyze:
         #Autores :Giampaolo E. D'Errico and Nadir Murru , artigo "Fuzzy Treatment of Candidate Outliers in Measurements"
 
         try:
+            #transformando a coluna em númerica para não gerar algum tipo de erro
+            to_arr=pd.to_numeric(self.dataframe[name_column],errors='coerce')
             #para tratar os dados antes de passar pelo loop, quando passar por um NaN
-            data_filter=self.dataframe[name_column].replace({np.nan:0})
+            data_filter=to_arr.replace({np.nan:0}).tolist()
 
             #transformando os dados para float, para agregar tanto os núms flutantes, como os ints
             transform_float=list(map(lambda x:float(x),data_filter))
